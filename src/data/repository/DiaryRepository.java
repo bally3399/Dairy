@@ -1,4 +1,4 @@
-package data.respository;
+package data.repository;
 
 import data.model.Diary;
 

@@ -1,4 +1,4 @@
-package data.respository;
+package data.repository;
 
 import data.model.Diary;
 
@@ -26,7 +26,7 @@ public class DiaryRepositoryImplement implements DiaryRepository{
         for (Diary diary : diaries) {
             if (diary.getUsername().equals(username)) return diary;
         }
-        throw new RuntimeException("You have to create entry");
+        return null;
     }
     @Override
     public long count() {
@@ -44,6 +44,11 @@ public class DiaryRepositoryImplement implements DiaryRepository{
 
     @Override
     public void delete(Diary diary) {
-        diaries.remove(diary);
+        for(Diary diary1: diaries) {
+            if (diary1.equals(diary)) {
+                diaries.remove(diary);
+                break;
+            }
+        }
     }
 }

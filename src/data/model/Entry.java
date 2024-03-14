@@ -3,10 +3,10 @@ package data.model;
 import java.time.LocalDate;
 
 public class Entry {
-    private final int id;
+    private int id;
     private String title;
     private String body;
-    private final LocalDate dateCreated = LocalDate.now();
+    private  LocalDate dateCreated = LocalDate.now();
 
     public Entry(int id, String title, String body) {
         this.id = id;
@@ -32,6 +32,11 @@ public class Entry {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+
     }
 
     public String toString(){

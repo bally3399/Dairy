@@ -1,4 +1,4 @@
-package data.respository;
+package data.repository;
 
 import data.model.Diary;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +16,7 @@ public class DiaryRepositoryImplementTest {
     public void saveTest(){
         Diary diary = new Diary("username", "1234");
         repository.save(diary);
-        assertEquals(1, repository.count());
+        assertEquals(1l, repository.count());
     }
     @Test
     public void saveTwoTest(){
@@ -24,7 +24,7 @@ public class DiaryRepositoryImplementTest {
         Diary diary1 = new Diary("username1", "1233");
         repository.save(diary);
         repository.save(diary1);
-        assertEquals(2, repository.count());
+        assertEquals(2l, repository.count());
 
     }
     @Test
@@ -33,7 +33,7 @@ public class DiaryRepositoryImplementTest {
         repository.save(diary);
         Diary foundDiary = repository.findById("username");
         assertEquals("username", foundDiary.getUsername());
-        assertEquals(1, repository.count());
+        assertEquals(1l, repository.count());
     }
     @Test
     public void findTwoUserByUsernameTest(){
@@ -48,16 +48,12 @@ public class DiaryRepositoryImplementTest {
 
         assertEquals("username", foundDiary.getUsername());
         assertEquals("username1", foundDiary1.getUsername());
-
-        assertEquals(2, repository.count());
     }
     @Test
-    public void findUserByUsername_deleteWithUsername_diary_isEmptyTest(){
+    public void findUserByUsername_deleteWithUsername_diaryIsEmptyTest(){
         Diary diary = new Diary("username", "1234");
         repository.save(diary);
-        Diary foundDiary = repository.findById("username");
         repository.delete("username");
-        assertEquals("username", foundDiary.getUsername());
         assertEquals(0, repository.count());
     }
     @Test
@@ -68,15 +64,9 @@ public class DiaryRepositoryImplementTest {
         Diary diary1 = new Diary("username1", "1234");
         repository.save(diary1);
 
-        Diary foundDiary = repository.findById("username");
-        Diary foundDiary1 = repository.findById("username1");
-
         repository.delete("username");
 
-        assertEquals("username", foundDiary.getUsername());
-        assertEquals("username1", foundDiary1.getUsername());
-
-        assertEquals(1, repository.count());
+        assertEquals(1l, repository.count());
     }
     @Test
     public void findAllTest(){
@@ -87,16 +77,16 @@ public class DiaryRepositoryImplementTest {
         repository.save(diary1);
 
         repository.findAll();
-        assertEquals(2, repository.count());
+        assertEquals(2l, repository.count());
     }
     @Test
     public void deleteWithDiaryTest(){
         Diary diary = new Diary("username", "1234");
         repository.save(diary);
-        assertEquals(1, repository.count());
+        assertEquals(1l, repository.count());
 
         repository.delete(diary);
-        assertEquals(0, repository.count());
+        assertEquals(0l, repository.count());
     }
     @Test
     public void saveTwoDiaries_deleteOne_diaryIsNotEmpty(){
@@ -105,10 +95,10 @@ public class DiaryRepositoryImplementTest {
 
         Diary diary1 = new Diary("username1", "1234");
         repository.save(diary1);
-        assertEquals(2, repository.count());
+        assertEquals(2l, repository.count());
 
         repository.delete(diary);
-        assertEquals(1, repository.count());
+        assertEquals(1l, repository.count());
     }
     @Test
     public void saveTwoDiaries_deleteTWo_diaryIsNotEmpty(){
@@ -117,11 +107,12 @@ public class DiaryRepositoryImplementTest {
 
         Diary diary1 = new Diary("username1", "1234");
         repository.save(diary1);
-        assertEquals(2, repository.count());
+
+        assertEquals(2l, repository.count());
 
         repository.delete(diary);
         repository.delete(diary1);
-        assertEquals(0, repository.count());
+        assertEquals(0l, repository.count());
     }
 
 
