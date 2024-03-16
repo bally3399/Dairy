@@ -9,6 +9,10 @@ public class RegisterRequest {
         this.password = password;
     }
 
+    public RegisterRequest() {
+
+    }
+
     public String getPassword() {
         return password;
     }

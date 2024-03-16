@@ -8,8 +8,7 @@ public class Entry {
     private String body;
     private  LocalDate dateCreated = LocalDate.now();
 
-    public Entry(int id, String title, String body) {
-        this.id = id;
+    public Entry(String title, String body) {
         this.title = title;
         this.body = body;
     }

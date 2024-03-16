@@ -1,6 +1,5 @@
 package data.repository;
 
-import data.model.Diary;
 import data.model.Entry;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,7 +16,7 @@ public class EntryRepositoryImplementTest {
 
     @Test
     public void saveTest() {
-        Entry entry = new Entry(1, "title", "body");
+        Entry entry = new Entry("title", "body");
         repository.save(entry);
 
         assertEquals(1, repository.count());
@@ -26,8 +25,8 @@ public class EntryRepositoryImplementTest {
 
     @Test
     public void saveTwoTest() {
-        Entry entry = new Entry(1, "title", "body");
-        Entry entry1 = new Entry(2, "title", "body");
+        Entry entry = new Entry("title", "body");
+        Entry entry1 = new Entry("title", "body");
         repository.save(entry);
         repository.save(entry1);
         assertEquals(2, repository.count());
@@ -36,7 +35,7 @@ public class EntryRepositoryImplementTest {
 
     @Test
     public void findUserByUsernameTest() {
-        Entry entry = new Entry(1, "title", "body");
+        Entry entry = new Entry("title", "body");
         repository.save(entry);
         Entry foundDiary = repository.findById(1);
         assertEquals(1, foundDiary.getId());
@@ -45,10 +44,10 @@ public class EntryRepositoryImplementTest {
 
     @Test
     public void findTwoUserByUsernameTest() {
-        Entry entry = new Entry(1, "username", "1234");
+        Entry entry = new Entry("username", "body");
         repository.save(entry);
 
-        Entry entry1 = new Entry(2, "username1", "1111");
+        Entry entry1 = new Entry("username1", "body");
         repository.save(entry1);
 
         Entry foundEntry = repository.findById(1);
@@ -60,10 +59,10 @@ public class EntryRepositoryImplementTest {
 
     @Test
     public void findTwoUserByUsername_deleteOneWithUsername_EntryIsNotEmptyTest() {
-        Entry entry = new Entry(1, "username", "1234");
+        Entry entry = new Entry("username", "body");
         repository.save(entry);
 
-        Entry entry1 = new Entry(2, "username", "1234");
+        Entry entry1 = new Entry("username", "body");
         repository.save(entry1);
         Entry foundEntry = repository.findById(1);
         Entry foundEntry1 = repository.findById(2);
@@ -75,7 +74,7 @@ public class EntryRepositoryImplementTest {
 
     @Test
     public void deleteWithEntryTest() {
-        Entry entry = new Entry(1, "username", "1234");
+        Entry entry = new Entry("username", "body");
         repository.save(entry);
         assertEquals(1, repository.count());
 
@@ -85,10 +84,10 @@ public class EntryRepositoryImplementTest {
 
     @Test
     public void saveTwoEntries_deleteOne_entryIsNotEmpty() {
-        Entry entry = new Entry(1, "username", "1234");
+        Entry entry = new Entry("username", "body");
         repository.save(entry);
 
-        Entry entry1 = new Entry(2, "username1", "1111");
+        Entry entry1 = new Entry("username1", "body");
         repository.save(entry1);
         assertEquals(2, repository.count());
 
@@ -97,11 +96,11 @@ public class EntryRepositoryImplementTest {
     }
 
     @Test
-    public void saveTwoDiaries_deleteTWo_diaryIsNotEmpty() {
-        Entry entry = new Entry(1, "username", "1234");
+    public void saveTwoDiaries_deleteTwo_diaryIsNotEmpty() {
+        Entry entry = new Entry("username", "body");
         repository.save(entry);
 
-        Entry entry1 = new Entry(2, "username", "1234");
+        Entry entry1 = new Entry( "username", "body");
         repository.save(entry1);
 
         assertEquals(2, repository.count());
@@ -110,4 +109,31 @@ public class EntryRepositoryImplementTest {
         repository.delete(entry1);
         assertEquals(0, repository.count());
     }
+    @Test
+    public void saveTwoDiary_findAll(){
+        Entry entry = new Entry("username", "body");
+        repository.save(entry);
+
+        Entry entry1 = new Entry("username1", "body");
+        repository.save(entry1);
+        repository.findAll();
+
+        assertEquals(2, repository.count());
+    }
+
+    @Test
+    public void update(){
+        Entry entry = new Entry("title", "body");
+        repository.save(entry);
+
+        Entry updatedEntry = repository.findById(1);
+        updatedEntry.setTitle("updatedTitle");
+        updatedEntry.setBody("updatedBody");
+        repository.save(updatedEntry);
+
+        assertEquals(1, updatedEntry.getId());
+        assertEquals("updatedTitle", updatedEntry.getTitle());
+        assertEquals("updatedBody", updatedEntry.getBody());
+    }
+
 }

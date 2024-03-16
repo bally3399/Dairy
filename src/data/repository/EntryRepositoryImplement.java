@@ -1,47 +1,51 @@
 package data.repository;
 
-import data.model.Diary;
 import data.model.Entry;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class EntryRepositoryImplement implements EntryRepository{
+public class EntryRepositoryImplement implements EntryRepository {
     private List<Entry> entries = new ArrayList<>();
     private int counter = 0;
 
+
     @Override
     public Entry save(Entry entry) {
-        if(isNew(entry)) addIdTo(entry);
-        entries.add(entry);
-        return entry;
-//
+        if (isNew(entry)) {
+            addIdTo(entry);
+            entries.add(entry);
+            System.out.println(entries);
+            return entry;
+        } else {
+            update(entry);
+            System.out.println(entries);
+            return entry;
+        }
     }
-
     private void addIdTo(Entry entry) {
         entry.setId(generateId());
     }
-    private int generateId(){
-       return ++counter;
 
+    private int generateId() {
+        return ++counter;
     }
     private boolean isNew(Entry entry) {
         return entry.getId() == 0;
     }
+    private void update(Entry entry) {
+        for (Entry findEntry :entries) {
+            if(findEntry.getId() == entry.getId()) {
+                findEntry.setBody(entry.getBody());
+                findEntry.setTitle(entry.getTitle());
 
-//    private void update() {
-//        for (Entry entry : entries) {
-//            entry.setId(id));
-//            entry.setTitle("title");
-//            entry.setBody("body");
-//            }
-//        }
-
-   // }
+            }
+        }
+    }
     @Override
     public List<Entry> findAll() {
-        return null;
+        return new ArrayList<>(entries);
     }
 
     @Override
