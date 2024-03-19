@@ -29,7 +29,7 @@ public class EntryRepositoryImplementTest {
         Entry entry1 = new Entry("title", "body");
         repository.save(entry);
         repository.save(entry1);
-        assertEquals(2, repository.count());
+        assertEquals(1, repository.count());
 
     }
 

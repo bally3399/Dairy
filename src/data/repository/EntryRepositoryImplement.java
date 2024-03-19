@@ -24,6 +24,7 @@ public class EntryRepositoryImplement implements EntryRepository {
             return entry;
         }
     }
+
     private void addIdTo(Entry entry) {
         entry.setId(generateId());
     }
@@ -31,18 +32,21 @@ public class EntryRepositoryImplement implements EntryRepository {
     private int generateId() {
         return ++counter;
     }
+
     private boolean isNew(Entry entry) {
         return entry.getId() == 0;
     }
+
     private void update(Entry entry) {
-        for (Entry findEntry :entries) {
-            if(findEntry.getId() == entry.getId()) {
+        for (Entry findEntry : entries) {
+            if (findEntry.getId() == entry.getId()) {
                 findEntry.setBody(entry.getBody());
                 findEntry.setTitle(entry.getTitle());
 
             }
         }
     }
+
     @Override
     public List<Entry> findAll() {
         return new ArrayList<>(entries);
@@ -50,7 +54,7 @@ public class EntryRepositoryImplement implements EntryRepository {
 
     @Override
     public Entry findById(int id) {
-        for(Entry entry: entries) if(entry.getId() == id) return entry;
+        for (Entry entry : entries) if (entry.getId() == id) return entry;
         return null;
     }
 
@@ -70,11 +74,22 @@ public class EntryRepositoryImplement implements EntryRepository {
 
     @Override
     public void delete(Entry entry) {
-        for(Entry entry1: entries) {
+        for (Entry entry1 : entries) {
             if (entry1.equals(entry)) {
                 entries.remove(entry);
                 break;
             }
         }
+    }
+
+    @Override
+    public List<Entry> findByAuthor(String username) {
+        List<Entry> entries1 = new ArrayList<>();
+        for (Entry entry : entries) {
+            if (entry.getAuthor().equals(username)) {
+                entries1.add(entry);
+            }
+        }
+        return entries1;
     }
 }

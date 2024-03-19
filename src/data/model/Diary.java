@@ -4,6 +4,7 @@ package data.model;
 public class Diary {
     private String username;
     private String password;
+    private boolean isLocked = true;
 
     public Diary(String username, String password) {
         this.username = username;
@@ -26,7 +27,14 @@ public class Diary {
         this.username = username;
     }
 
+    public void setLock(boolean locked) {
+        isLocked = locked;
+    }
+
     public void setPassword(String password) {
         this.password = password;
+    }
+    public boolean isLocked(){
+        return isLocked;
     }
 }
