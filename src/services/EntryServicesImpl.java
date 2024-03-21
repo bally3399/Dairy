@@ -1,16 +1,13 @@
 package services;
 
 import data.model.Entry;
-import data.repository.DiaryRepository;
-import data.repository.DiaryRepositoryImplement;
 import data.repository.EntryRepository;
 import data.repository.EntryRepositoryImplement;
 import dtos.requests.CreateEntryRequest;
 import exception.DiaryNotFound;
 import exception.EntryNotFoundForUser;
-import exception.IncorrectPassword;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class EntryServicesImpl implements EntryServices{
