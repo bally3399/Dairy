@@ -37,12 +37,11 @@ public class EntryRepositoryImplement implements EntryRepository {
         return entry.getId() == 0;
     }
 
-    private void update(Entry entry) {
+    public void update(Entry entry) {
         for (Entry findEntry : entries) {
             if (findEntry.getId() == entry.getId()) {
                 findEntry.setBody(entry.getBody());
                 findEntry.setTitle(entry.getTitle());
-
             }
         }
     }
@@ -91,5 +90,14 @@ public class EntryRepositoryImplement implements EntryRepository {
             }
         }
         return entries1;
+    }
+
+    @Override
+    public Entry findByTitle(String title) {
+        for(Entry entry: entries){
+            if(entry.getTitle().equals(title)) return entry;
+            break;
+        }
+        return null;
     }
 }

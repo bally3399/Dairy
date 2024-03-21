@@ -16,4 +16,6 @@ public interface DiaryServices {
 
     void createEntryWith(CreateEntryRequest createEntryRequest);
     void logout(String username);
+
+    void updateEntry(String title, String body);
 }

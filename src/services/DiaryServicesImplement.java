@@ -10,6 +10,7 @@ import dtos.requests.CreateEntryRequest;
 import dtos.requests.RegisterRequest;
 import dtos.requests.LoginRequest;
 import exception.DiaryNotFound;
+import exception.EntryNotFoundException;
 import exception.IncorrectPassword;
 import exception.UsernameException;
 
@@ -50,6 +51,18 @@ public class DiaryServicesImplement implements DiaryServices{
             throw new IncorrectPassword("Username is not valid");
         }
         diary.setLock(true);
+    }
+
+    @Override
+    public void updateEntry(String title, String body) {
+        Entry entry = entryRepository.findByTitle(title);
+        if (entry != null && entry.getBody().equals(body)) {
+            entry.setBody(body);
+            entryRepository.update(entry);
+            System.out.println("Entry updated successfully");
+        } else {
+            throw new EntryNotFoundException("Entry not found");
+        }
     }
 
 
